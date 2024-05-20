@@ -1,21 +1,22 @@
 version: '3'
 services:
  borgserver:
-  image: nold360/borgserver
-  #build: .
+  image: losflebos/borgserver
+  build: .
   volumes:
    - ./backup:/backup
    - ./sshkeys:/sshkeys
   ports:
-   - "2222:22"
+   - "4804:22"
   environment:
   # Additional Arguments, see https://borgbackup.readthedocs.io/en/stable/usage/serve.html
-   BORG_SERVE_ARGS: ""
+    BORG_SERVE_ARGS: ""
 
-   # If set to "yes", only the BORG_ADMIN
-   # can delete/prune the other clients archives/repos
-   BORG_APPEND_ONLY: "no"
+    # If set to "yes", only the BORG_ADMIN
+    # can delete/prune the other clients archives/repos
+    BORG_APPEND_ONLY: "yes"
 
-   # Filename of Admins SSH-Key; has full access to all repos
-   BORG_ADMIN: ""
-  restart: unless-stopped
+    # Filename of Admins SSH-Key; has full access to all repos
+    BORG_ADMIN: "desktopi9_admin"
+
+  restart: always
