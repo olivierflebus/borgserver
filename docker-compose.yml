@@ -4,10 +4,12 @@ services:
   image: losflebos/borgserver
   build: .
   volumes:
-   - ./backup:/backup
-   - ./sshkeys:/sshkeys
+   - /home/borg/backup:/backup
+   - /home/borg/sshkeys:/sshkeys
   ports:
    - "4804:22"
+  env_file:
+    - stack.env
   environment:
   # Additional Arguments, see https://borgbackup.readthedocs.io/en/stable/usage/serve.html
     BORG_SERVE_ARGS: ""
