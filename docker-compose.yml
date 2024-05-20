@@ -2,6 +2,7 @@ version: '3'
 services:
  borgserver:
   image: losflebos/borgserver
+  container_name: borgserver
   build: .
   volumes:
    - /home/borg/backup:/backup
