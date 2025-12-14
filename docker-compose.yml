@@ -1,4 +1,3 @@
-version: '3'
 services:
  borgserver:
   image: losflebos/borgserver
@@ -20,6 +19,6 @@ services:
     BORG_APPEND_ONLY: "yes"
 
     # Filename of Admins SSH-Key; has full access to all repos
-    BORG_ADMIN: "desktopi9_admin"
+    BORG_ADMIN: "unsyn-borg-ui"
 
   restart: always

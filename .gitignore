@@ -1,3 +1,4 @@
 /backup
 /sshkeys
 .env
+stack.env

@@ -6,7 +6,7 @@
 # but with another base image
 # cron in python docker image from https://github.com/fronzbot/docker-pycron/blob/master/Dockerfile
 
-FROM python:3.11.4-slim-bullseye
+FROM python:3.14.2-slim-bookworm
 
 # from official borgbackup from source
 # but assuming python is already installed
@@ -17,10 +17,13 @@ RUN apt-get update && apt upgrade -y && \
     curl \
     rsyslog \
     logrotate \
-    libssl-dev openssh-client \ 
+    openssh-client \
     openssl \
+    libssl-dev \
     libacl1-dev \
-    libacl1 \
+    liblz4-dev \
+    libzstd-dev \
+    libxxhash-dev \
     build-essential \
     libfuse3-dev fuse3 pkg-config python3-pkgconfig \
     tzdata \   
