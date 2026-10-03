@@ -4,9 +4,8 @@
 ############################################################
 # same functionality as b3vis/docker-borgmatic
 # but with another base image
-# cron in python docker image from https://github.com/fronzbot/docker-pycron/blob/master/Dockerfile
 
-FROM python:3.14.2-slim-bookworm
+FROM python:3.14.8-slim-trixie
 
 # from official borgbackup from source
 # but assuming python is already installed
@@ -41,7 +40,7 @@ RUN apt-get update && apt-get -y --no-install-recommends install \
 		mkdir /home/borg/.ssh && \
 		chmod 700 /home/borg/.ssh && \
 		chown borg:borg /home/borg/.ssh && \
-		mkdir /run/sshd && \
+		mkdir -p /run/sshd && \
 		rm -f /etc/ssh/ssh_host*key* && \
 		rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
