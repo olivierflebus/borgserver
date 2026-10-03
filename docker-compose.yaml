@@ -2,6 +2,7 @@ version: '3'
 services:
  borgserver:
   image: losflebos/borgserver
+  pull_policy: build
   container_name: borgserver
   
   build: .
