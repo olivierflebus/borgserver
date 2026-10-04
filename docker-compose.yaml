@@ -1,0 +1,35 @@
+version: '3'
+services:
+ borgserver:
+  image: losflebos/borgserver
+  pull_policy: build
+  container_name: borgserver
+  
+  build: .
+  
+  volumes:
+   # need to stick to what's in run.sh 
+   # BORG_DATA_DIR=/backup
+   # BORG_DATA_EXT_DIR=/backup_ext # for external drive
+   - ${BORG_BACKUP_DIR}:/backup
+   - ${BORG_DATA_EXT_DIR}:/backup_ext
+   - ${BORG_SSHKEYS_DIR:-/home/borg/sshkeys}:/sshkeys
+  ports:
+   - "${BORG_SSH_PORT:-4804}:22"
+
+  environment:
+    PUID: "${PUID:-1000}"
+    PGID: "${PGID:-1000}"
+    TZ: "${TZ:-UTC}"
+
+  # Additional Arguments, see https://borgbackup.readthedocs.io/en/stable/usage/serve.html
+    BORG_SERVE_ARGS: "${BORG_SERVE_ARGS}"
+
+    # If set to "yes", only the BORG_ADMIN
+    # can delete/prune the other clients archives/repos
+    BORG_APPEND_ONLY: "${BORG_APPEND_ONLY:-yes}"
+
+    # Filename of Admins SSH-Key; has full access to all repos
+    BORG_ADMIN: "${BORG_ADMIN}"
+
+  restart: always
