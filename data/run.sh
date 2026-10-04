@@ -8,8 +8,9 @@ usermod -o -u "$PUID" borg &>/dev/null
 groupmod -o -g "$PGID" borg &>/dev/null
 
 BORG_DATA_DIR=/backup
+BORG_DATA_EXT_DIR=/backup_ext # for external drive
 SSH_KEY_DIR=/sshkeys
-BORG_CMD='cd ${BORG_DATA_DIR}/${client_name}; borg serve --restrict-to-path ${BORG_DATA_DIR}/${client_name} ${BORG_SERVE_ARGS}'
+BORG_CMD='cd ${BORG_DATA_DIR}/${client_name}; borg serve --restrict-to-path ${BORG_DATA_DIR}/${client_name} --restrict-to-path ${BORG_DATA_EXT_DIR}/${client_name} ${BORG_SERVE_ARGS}'
 AUTHORIZED_KEYS_PATH=/home/borg/.ssh/authorized_keys
 
 # Append only mode?

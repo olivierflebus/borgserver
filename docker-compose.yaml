@@ -8,8 +8,11 @@ services:
   build: .
   
   volumes:
-   # - /home/borg/backup:/backup # moved to SSD Ext
+   # need to stick to what's in run.sh 
+   # BORG_DATA_DIR=/backup
+   # BORG_DATA_EXT_DIR=/backup_ext # for external drive
    - ${BORG_BACKUP_DIR}:/backup
+   - ${BORG_DATA_EXT_DIR}:/backup_ext
    - ${BORG_SSHKEYS_DIR:-/home/borg/sshkeys}:/sshkeys
   ports:
    - "${BORG_SSH_PORT:-4804}:22"
